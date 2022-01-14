@@ -1,12 +1,14 @@
-const { Pool, Client } = require('pg')
-
-const client = new Client({
+const { Pool } = require('pg')
+const db = new Pool({
   host: 'localhost',
+  user: 'jojo',
+  password: 'jojo',
   port: 5432,
-  database: "productAPI-D"
+  database: "productapi_d"
 })
 
-client.connect()
-.then(() => console.log('Connected. Listening on port 5432'))
-.catch(e => console.log(e))
-.finally(() => client.end());
+db.connect()
+.then(() => console.log('Database connected. Listening on port 5432'))
+.catch(e => console.log(e));
+
+module.exports = db;

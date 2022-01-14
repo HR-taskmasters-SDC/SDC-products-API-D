@@ -9,7 +9,7 @@
     "stop-pg": "pg_ctl -D /usr/local/var/postgres stop",
     "login-db": "psql productAPI-D",
     "seed": "psql -f server/database/schema.sql -p 5432 -U jojo productapi_d",
-    "start": "node ./server/app.js"
+    "start": "nodemon ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "csv": "^6.0.5",
     "csv-writer": "^1.6.0",
     "express": "^4.17.2",
+    "nodemon": "^2.0.15",
     "pg": "^8.7.1",
     "pg-copy-streams": "6.0.2",
     "pg-promise": "^10.11.1"
