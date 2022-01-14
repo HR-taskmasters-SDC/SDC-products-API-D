@@ -1,0 +1,43 @@
+{
+  "name": "sdc-products-api-d",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-pg": "pg_ctl -D /usr/local/var/postgres start",
+    "stop-pg": "pg_ctl -D /usr/local/var/postgres stop",
+    "login-db": "psql productAPI-D",
+    "seed": "psql -f server/database/schema.sql -p 5432 -U jojo productapi_d",
+    "start": "node ./server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HR-taskmasters-SDC/SDC-products-API-D.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HR-taskmasters-SDC/SDC-products-API-D/issues"
+  },
+  "homepage": "https://github.com/HR-taskmasters-SDC/SDC-products-API-D#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "csv": "^6.0.5",
+    "csv-writer": "^1.6.0",
+    "express": "^4.17.2",
+    "pg": "^8.7.1",
+    "pg-copy-streams": "6.0.2",
+    "pg-promise": "^10.11.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.8",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
+    "jest": "^27.4.7",
+    "mongodb": "^4.3.0",
+    "mongoose": "^6.1.6"
+  }
+}
