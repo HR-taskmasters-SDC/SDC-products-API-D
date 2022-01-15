@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const db = require('./database');
-const path = require('path');
+const router = require('./router.js');
 const port = 3000;
 
 app.use(express.json());
+app.use('/', router);
 
-app.listen(port, () => console.log('Server connected. Listening on port', port))
+app.listen(port, () => console.log('Server connected. Listening on port', port));
