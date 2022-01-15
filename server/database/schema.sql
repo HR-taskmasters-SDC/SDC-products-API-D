@@ -35,8 +35,9 @@ CREATE TABLE IF NOT EXISTS styles (
 
 CREATE TABLE IF NOT EXISTS cart (
   user_session INTEGER NOT NULL,
-  product_id INTEGER REFERENCES product(id) NOT NULL,
-  active BOOLEAN
+  product_id INTEGER NOT NULL,
+  active BOOLEAN,
+  quantity INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS skus (
@@ -55,6 +56,7 @@ CREATE TABLE IF NOT EXISTS photos (
 
 -- TRUNCATE product, related_products, features, styles, cart, skus, photos;
 
+CREATE UNIQUE INDEX user_sess_prod_id on cart(user_session, product_id);
 SET session_replication_role = 'replica';
 
 \COPY product FROM './data/product.csv' DELIMITER ',' CSV HEADER;

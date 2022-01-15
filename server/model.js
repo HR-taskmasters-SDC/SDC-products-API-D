@@ -30,7 +30,7 @@ module.exports = {
     return db.query('SELECT product_id AS sku_id, quantity as count FROM cart WHERE user_session = $1 AND active = true', [sessionId])
   },
 
-  addToCart: (sessionId, skuId) => { //STILL TO DO
-    return db.query(`INSERT INTO cart VALUES (4321, 7, true, 1) ON CONFLICT (user_session, product_id) DO UPDATE SET quantity = (cart.quantity + 1)`, [sessionId, skuId])
+  addToCart: (sessionId, skuId) => { //DONE
+    return db.query(`INSERT INTO cart VALUES ($1, $2, true, 1) ON CONFLICT (user_session, product_id) DO UPDATE SET quantity = (cart.quantity + 1)`, [sessionId, skuId])
   }
 }
