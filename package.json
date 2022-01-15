@@ -9,7 +9,8 @@
     "stop-pg": "pg_ctl -D /usr/local/var/postgres stop",
     "login-db": "psql productAPI-D",
     "seed": "psql -f server/database/schema.sql -p 5432 -U jojo productapi_d",
-    "start": "nodemon ./server/index.js"
+    "start": "nodemon ./server/index.js",
+    "stress-test": "k6 run --vus 1000 --duration 15s ./__tests__/k6.js"
   },
   "repository": {
     "type": "git",

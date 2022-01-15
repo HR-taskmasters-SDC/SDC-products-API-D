@@ -16,10 +16,9 @@ module.exports = {
   },
 
   findStyles: (productId) => { //STILL TO DO
-    return db.query(`SELECT json_agg(SELECT id AS style_id, name, original_price, sale_price, default_style AS "default\?"
-    FROM styles WHERE product_id = $1) AS results FROM `, [productId])
-    // return db.query(`SELECT id AS style_id, name, original_price, sale_price, default_style AS "default\?"
-    // FROM styles WHERE product_id = $1`, [productId])
+    // return db.query(``, [productId])
+    return db.query(`SELECT id AS style_id, name, original_price, sale_price, default_style AS "default\?"
+    FROM styles WHERE product_id = $1`, [productId])
   },
 
   findRelated: (productId) => { //DONE
@@ -31,6 +30,6 @@ module.exports = {
   },
 
   addToCart: (sessionId, skuId) => { //DONE
-    return db.query(`INSERT INTO cart (user_session, product_id, active, quantity) VALUES ($1, $2, true, 1) ON CONFLICT (user_session, product_id) DO UPDATE SET quantity = (cart.quantity + 1)`, [12443, 3])
+    return db.query(`INSERT INTO cart (user_session, product_id, active, quantity) VALUES ($1, $2, true, 1) ON CONFLICT (user_session, product_id) DO UPDATE SET quantity = (cart.quantity + 1)`, [sessionId, skuId])
   }
 }
