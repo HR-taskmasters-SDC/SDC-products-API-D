@@ -31,6 +31,6 @@ module.exports = {
   },
 
   addToCart: (sessionId, skuId) => { //DONE
-    return db.query(`INSERT INTO cart VALUES ($1, $2, true, 1) ON CONFLICT (user_session, product_id) DO UPDATE SET quantity = (cart.quantity + 1)`, [sessionId, skuId])
+    return db.query(`INSERT INTO cart (user_session, product_id, active, quantity) VALUES ($1, $2, true, 1) ON CONFLICT (user_session, product_id) DO UPDATE SET quantity = (cart.quantity + 1)`, [12443, 3])
   }
 }

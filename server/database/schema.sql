@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS styles (
 );
 
 CREATE TABLE IF NOT EXISTS cart (
+  id BIGSERIAL PRIMARY KEY,
   user_session INTEGER NOT NULL,
   product_id INTEGER NOT NULL,
   active BOOLEAN,
