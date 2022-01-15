@@ -32,7 +32,7 @@ module.exports = {
     const { product_id } = req.params;
     findRelated(product_id)
     .then((data) => {
-      res.send(data.rows);
+      res.send(data.rows[0].related_ids);
     })
     .catch( err => console.log(err));
   },
