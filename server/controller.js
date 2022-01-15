@@ -38,7 +38,7 @@ module.exports = {
   },
 
   getCart: (req, res) => {
-    const sessionId = 'PLACEHOLDER';
+    const sessionId = req.params;
     findCart(sessionId)
     .then((data) => {
       res.send(data.rows);
@@ -47,7 +47,7 @@ module.exports = {
   },
 
   postCart: (req, res) => {
-    const sessionId = 'PLACEHOLDER';
+    const sessionId = req.sessionID;
     const { sku_id } = req.params;
     addToCart(sessionId, sku_id)
     .then((data) => {

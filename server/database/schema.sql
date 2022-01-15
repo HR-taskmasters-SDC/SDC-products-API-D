@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS related_products (
 CREATE TABLE IF NOT EXISTS features (
   id BIGINT PRIMARY KEY NOT NULL,
   product_id INTEGER REFERENCES product(id) NOT NULL,
-  feature TEXT NOT NULL,
+  feature TEXT,
   "value" TEXT
 );
 
@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS styles (
 );
 
 CREATE TABLE IF NOT EXISTS cart (
-  id BIGINT PRIMARY KEY NOT NULL,
   user_session INTEGER NOT NULL,
   product_id INTEGER REFERENCES product(id) NOT NULL,
   active BOOLEAN
