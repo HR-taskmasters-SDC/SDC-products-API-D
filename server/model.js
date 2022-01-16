@@ -26,7 +26,7 @@ module.exports = {
   },
 
   findSkus: (styleId) => {
-    return db.query(`SELECT size, quantity FROM skus WHERE style_d = $1`, [styleId])
+    return db.query(`SELECT id, size, quantity FROM skus WHERE style_id = $1`, [styleId])
   },
 
   findRelated: (productId) => { //DONE

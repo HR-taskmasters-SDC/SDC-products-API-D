@@ -33,14 +33,21 @@ module.exports = {
     .then((result) => {
       result.results.forEach((style) => {
         let photoPromises = [];
+        let skuPromises = [];
         photoPromises.push(findPhotos(style.style_id)
         .then((data) => {
           return data.rows;
         }))
+        skuPromises.push(findSkus(style.style_id)
+        .then((data) => {
+          let fixer = {}
+          return data.rows
+        }))
         toplevel.push(
-          Promise.all([...photoPromises])
+          Promise.all([...photoPromises, ...skuPromises])
           .then((data) => {
             style.photos = data[0];
+            style.skus = data[1];
           })
         )
       })
