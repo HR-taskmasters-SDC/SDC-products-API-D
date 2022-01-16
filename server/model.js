@@ -15,10 +15,18 @@ module.exports = {
     [productId])
   },
 
-  findStyles: (productId) => { //STILL TO DO
+  findStyles: (productId) => { //DONE
     // return db.query(``, [productId])
     return db.query(`SELECT id AS style_id, name, original_price, sale_price, default_style AS "default\?"
     FROM styles WHERE product_id = $1`, [productId])
+  },
+
+  findPhotos: (styleId) => { //TO DO
+    return db.query(`SELECT thumbnail_url, url FROM photos WHERE style_id = $1`,[styleId])
+  },
+
+  findSkus: (styleId) => {
+    return db.query(`SELECT size, quantity FROM skus WHERE style_d = $1`, [styleId])
   },
 
   findRelated: (productId) => { //DONE

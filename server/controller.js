@@ -1,4 +1,4 @@
-const { getAll, getOne, findStyles, findRelated, findCart, addToCart } = require('./model.js');
+const { getAll, getOne, findStyles, findPhotos, findSkus, findRelated, findCart, addToCart } = require('./model.js');
 
 module.exports = {
   getAllProducts: (req, res) => {
@@ -21,9 +21,35 @@ module.exports = {
 
   getStyles: (req, res) => {
     const { product_id } = req.params;
+    let finalResult = {};
+    finalResult.product_id = product_id;
+    let toplevel = [];
+
     findStyles(product_id)
     .then((data) => {
-      res.send(data.rows);
+      finalResult.results = data.rows;
+      return finalResult;
+    })
+    .then((result) => {
+      result.results.forEach((style) => {
+        let photoPromises = [];
+        photoPromises.push(findPhotos(style.style_id)
+        .then((data) => {
+          return data.rows;
+        }))
+        toplevel.push(
+          Promise.all([...photoPromises])
+          .then((data) => {
+            style.photos = data[0];
+          })
+        )
+      })
+    })
+    .then(() => {
+      Promise.all(toplevel)
+      .then(() => {
+        res.send(finalResult)
+      })
     })
     .catch( err => console.log(err));
   },
