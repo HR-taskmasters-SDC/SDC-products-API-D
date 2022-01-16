@@ -47,7 +47,13 @@ module.exports = {
           Promise.all([...photoPromises, ...skuPromises])
           .then((data) => {
             style.photos = data[0];
-            style.skus = data[1];
+            style.skus = {}
+            data[1].forEach((item) => {
+              style.skus[item.id] = {
+                quantity: item.quantity,
+                size: item.size
+              }
+            })
           })
         )
       })
