@@ -2,6 +2,8 @@ const db = require('./database');
 
 module.exports = {
   getAll: (page, limit) => { //DONE
+    page = page || 1;
+    limit = limit || 20;
     return db.query(`SELECT * FROM product LIMIT $2 OFFSET $1`, [((page * limit) - limit), limit])
   },
 
