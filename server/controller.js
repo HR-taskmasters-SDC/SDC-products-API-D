@@ -40,7 +40,6 @@ module.exports = {
         }))
         skuPromises.push(findSkus(style.style_id)
         .then((data) => {
-          let fixer = {}
           return data.rows
         }))
         toplevel.push(
@@ -49,6 +48,7 @@ module.exports = {
             style.photos = data[0];
             style.skus = {}
             data[1].forEach((item) => {
+              style.sale_price = "null" ? null : style.sale_price;
               style.skus[item.id] = {
                 quantity: item.quantity,
                 size: item.size

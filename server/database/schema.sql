@@ -60,12 +60,12 @@ CREATE TABLE IF NOT EXISTS photos (
 CREATE UNIQUE INDEX user_sess_prod_id on cart(user_session, product_id);
 SET session_replication_role = 'replica';
 
-\COPY product FROM './data/product.csv' DELIMITER ',' CSV HEADER;
-\COPY related_products FROM './data/related.csv' DELIMITER ',' CSV HEADER;
-\COPY features FROM './data/features.csv' DELIMITER ',' CSV HEADER;
-\COPY styles FROM './data/styles.csv' DELIMITER ',' CSV HEADER;
-\COPY cart FROM './data/cart.csv' DELIMITER ',' CSV HEADER;
-\COPY skus FROM './data/skus.csv' DELIMITER ',' CSV HEADER;
-\COPY photos FROM './data/photos.csv' DELIMITER ',' CSV HEADER;
+-- \COPY product FROM './data/product.csv' DELIMITER ',' CSV HEADER;
+-- \COPY related_products FROM './data/related.csv' DELIMITER ',' CSV HEADER;
+-- \COPY features FROM './data/features.csv' DELIMITER ',' CSV HEADER;
+-- \COPY styles FROM './data/styles.csv' DELIMITER ',' CSV HEADER;
+-- \COPY cart FROM './data/cart.csv' DELIMITER ',' CSV HEADER;
+-- \COPY skus FROM './data/skus.csv' DELIMITER ',' CSV HEADER;
+-- \COPY photos FROM './data/photos.csv' DELIMITER ',' CSV HEADER;
 
 SET session_replication_role = 'origin';
