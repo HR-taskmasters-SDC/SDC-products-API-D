@@ -56,7 +56,13 @@ CREATE TABLE IF NOT EXISTS photos (
 );
 
 -- TRUNCATE product, related_products, features, styles, cart, skus, photos;
-
+CREATE INDEX productid on product(id);
+CREATE INDEX relatedid on related_products(id);
+CREATE INDEX featuresid on features(id);
+CREATE INDEX stylesid on styles(id);
+CREATE INDEX cartid on cart(id);
+CREATE INDEX skusid on skus(id);
+CREATE INDEX photosid on photos(id);
 CREATE UNIQUE INDEX user_sess_prod_id on cart(user_session, product_id);
 SET session_replication_role = 'replica';
 
