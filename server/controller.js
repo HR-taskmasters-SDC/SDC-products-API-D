@@ -29,7 +29,7 @@ module.exports = {
       data.results = response.rows;
       res.send(data);
     })
-    catch((err) => {
+    .catch((err) => {
       console.error(err);
       res.sendStatus(500);
     })
