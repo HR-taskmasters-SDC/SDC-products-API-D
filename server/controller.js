@@ -7,7 +7,7 @@ module.exports = {
     .then((data) => {
       res.send(data.rows);
     })
-    .catch( err => console.log(err));
+    .catch( err => res.sendStatus(500));
   },
 
   getOneProduct: (req, res) => {
@@ -16,55 +16,69 @@ module.exports = {
     .then((data) => {
       res.send(data.rows[0]);
     })
-    .catch( err => console.log(err));
+    .catch( err => res.sendStatus(500));
   },
 
   getStyles: (req, res) => {
     const { product_id } = req.params;
-    let finalResult = {};
-    finalResult.product_id = product_id;
-    let toplevel = [];
-
+    let data = {};
+    data.product_id = product_id;
+    data.results =[];
     findStyles(product_id)
-    .then((data) => {
-      finalResult.results = data.rows;
-      return finalResult;
+    .then((response) => {
+      data.results = response.rows;
+      res.send(data);
     })
-    .then((result) => {
-      result.results.forEach((style) => {
-        let photoPromises = [];
-        let skuPromises = [];
-        photoPromises.push(findPhotos(style.style_id)
-        .then((data) => {
-          return data.rows;
-        }))
-        skuPromises.push(findSkus(style.style_id)
-        .then((data) => {
-          return data.rows
-        }))
-        toplevel.push(
-          Promise.all([...photoPromises, ...skuPromises])
-          .then((data) => {
-            style.photos = data[0];
-            style.skus = {}
-            data[1].forEach((item) => {
-              style.sale_price = "null" ? null : style.sale_price;
-              style.skus[item.id] = {
-                quantity: item.quantity,
-                size: item.size
-              }
-            })
-          })
-        )
-      })
+    catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
     })
-    .then(() => {
-      Promise.all(toplevel)
-      .then(() => {
-        res.send(finalResult)
-      })
-    })
-    .catch( err => console.log(err));
+
+    // let finalResult = {};
+
+    // finalResult.product_id = product_id;
+    // let toplevel = [];
+
+    // findStyles(product_id)
+    // .then((data) => {
+    //   finalResult.results = data.rows;
+    //   return finalResult;
+    // })
+    // .then((result) => {
+    //   result.results.forEach((style) => {
+    //     let photoPromises = [];
+    //     let skuPromises = [];
+    //     photoPromises.push(findPhotos(style.style_id)
+    //     .then((data) => {
+    //       return data.rows;
+    //     }))
+    //     skuPromises.push(findSkus(style.style_id)
+    //     .then((data) => {
+    //       return data.rows
+    //     }))
+    //     toplevel.push(
+    //       Promise.all([...photoPromises, ...skuPromises])
+    //       .then((data) => {
+    //         style.photos = data[0];
+    //         style.skus = {}
+    //         data[1].forEach((item) => {
+    //           style.sale_price = "null" ? null : style.sale_price;
+    //           style.skus[item.id] = {
+    //             quantity: item.quantity,
+    //             size: item.size
+    //           }
+    //         })
+    //       })
+    //     )
+    //   })
+    // })
+    // .then(() => {
+    //   Promise.all(toplevel)
+    //   .then(() => {
+    //     res.send(finalResult)
+    //   })
+    // })
+    // .catch( err => res.sendStatus(500));
   },
 
   getRelated:(req, res) => {
@@ -73,7 +87,7 @@ module.exports = {
     .then((data) => {
       res.send(data.rows[0].related_ids);
     })
-    .catch( err => console.log(err));
+    .catch( err => res.sendStatus(500));
   },
 
   getCart: (req, res) => {
@@ -82,7 +96,7 @@ module.exports = {
     .then((data) => {
       res.send(data.rows);
     })
-    .catch( err => console.log(err));
+    .catch( err => res.sendStatus(500));
   },
 
   postCart: (req, res) => {
@@ -92,6 +106,6 @@ module.exports = {
     .then((data) => {
       res.send(data.rows);
     })
-    .catch( err => console.log(err));
+    .catch( err => res.sendStatus(500));
   }
 }

@@ -19,8 +19,10 @@ module.exports = {
 
   findStyles: (productId) => { //DONE
     // return db.query(``, [productId])
-    return db.query(`SELECT id AS style_id, name, original_price, sale_price, default_style AS "default\?"
-    FROM styles WHERE product_id = $1`, [productId])
+    return db.query(`SELECT id AS style_id, name, original_price, sale_price, default_style AS "default?",
+          (SELECT json_agg(json_build_object('thumbnail_url', thumbnail_url, 'url', url)) AS photos FROM photos WHERE photos.styles_id = styles.id),
+          (SELECT json_object_agg(id, json_build_object('size', size, 'quantity', quantity)) AS skus FROM skus WHERE skus.styles_id = styles.id),
+        FROM styles WHERE product_id = $1`, [productId])
   },
 
   findPhotos: (styleId) => { //TO DO
